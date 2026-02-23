@@ -4,26 +4,37 @@ pipeline {
     environment {
         APP_ENV = "staging"
     }
+
     stages {
+
         stage('Hello') {
             steps {
                 echo 'Hello World'
                 echo "${APP_ENV}"
             }
         }
-        stage('learn credentials'){
-            withCredentials([
-              usernamePassword(credentialsId: '111', usernameVariable: 'USER', passwordVariable: 'PASS'),
-            ]) {
-		  bat '''
-			echo  Deploying as %USER% %PASS%
-		  '''
-		}
-        }
-        stage('build') {
-                steps {
-                    echo 'The second stage'
-                    echo 'The second steps'
+
+        stage('learn credentials') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: '111',
+                        usernameVariable: 'USER',
+                        passwordVariable: 'PASS'
+                    )
+                ]) {
+                    bat '''
+                        echo Deploying as %USER% %PASS%
+                    '''
                 }
+            }
         }
-}}
+
+        stage('build') {
+            steps {
+                echo 'The second stage'
+                echo 'The second steps'
+            }
+        }
+    }
+}
