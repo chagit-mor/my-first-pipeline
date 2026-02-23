@@ -7,16 +7,7 @@ pipeline {
     }
     environment {
         APP_ENV = "staging"
-        withCredentials([
-                    usernamePassword(
-                        credentialsId: '222',
-                        usernameVariable: 'USER',
-                        passwordVariable: 'PASS'
-                    )
-                ]) {
-                    USERE = USER
-                    PASSE = PASS
-                }
+
     }
 
     stages {
