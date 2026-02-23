@@ -1,8 +1,22 @@
 pipeline {
     agent any
 
+    options {
+        timeout(time: 5, unit: 'SECONDS')
+        buildDiscarder(logRotator(numToKeepStr: '3'))
+    }
     environment {
         APP_ENV = "staging"
+        withCredentials([
+                    usernamePassword(
+                        credentialsId: '222',
+                        usernameVariable: 'USER',
+                        passwordVariable: 'PASS'
+                    )
+                ]) {
+                    USERE = USER
+                    PASSE = PASS
+                }
     }
 
     stages {
