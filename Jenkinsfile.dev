@@ -25,4 +25,5 @@ pipeline {
                     echo 'The second stage'
                     echo 'The second steps'
                 }
-            }
+        }
+}}
