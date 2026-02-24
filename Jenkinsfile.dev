@@ -12,8 +12,10 @@ pipeline {
             }
         }
         stage('learn credentials') {
+            steps{
              echo 'learn credentials'
               echo "${APP_ENV}"
+            }
 
         }
 
